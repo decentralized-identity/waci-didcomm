@@ -1,4 +1,4 @@
-# WACI Presentation Exchange
+# WACI DIDComm
 
 > WACI [__wak__-ee] - Wallet And Credential Interactions
 
