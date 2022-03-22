@@ -814,6 +814,7 @@ In the following message structure, the issuer wants a Permanent Resident Card (
                      "@context":"https://www.w3.org/2018/credentials/v1",
                      "id":"https://eu.com/claims/DriversLicense",
                      "type":[
+                        "VerifiableCredential",
                         "EUDriversLicense"
                      ],
                      "issuer":"did:foo:123",
@@ -903,6 +904,7 @@ The User sends a [Credential Application message](https://identity.foundation/cr
                      ],
                      "id":"urn:uvci:af5vshde843jf831j128fj",
                      "type":[
+                        "VerifiableCredential",
                         "VaccinationCertificate",
                         "PermanentResidentCard"
                      ],
@@ -990,6 +992,7 @@ The Issuer sends a [Credential Fulfilment message](https://identity.foundation/c
                      "@context":"https://www.w3.org/2018/credentials/v1",
                      "id":"https://eu.com/claims/DriversLicense",
                      "type":[
+                        "VerifiableCredential",
                         "EUDriversLicense"
                      ],
                      "issuer":"did:foo:123",
@@ -1291,8 +1294,8 @@ object for the VP and used to generate the signature there.
               ],
               "id": "urn:uvci:af5vshde843jf831j128fj",
               "type": [
-                "VaccinationCertificate",
-                "VerifiableCredential"
+                "VerifiableCredential",
+                "VaccinationCertificate"                
               ],
               "description": "COVID-19 Vaccination Certificate",
               "name": "COVID-19 Vaccination Certificate",
