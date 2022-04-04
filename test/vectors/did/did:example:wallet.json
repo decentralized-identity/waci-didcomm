@@ -24,6 +24,7 @@
          "type":"DIDCommMessaging"
       }
    ],
+   "authentication": ["did:example:wallet#key1"],
    "keyAgreement":[
       "did:example:wallet#key1"
    ]
