@@ -1,0 +1,9 @@
+{
+   "type":"https://didcomm.org/present-proof/3.0/ack",
+   "from":"did:example:verifier",
+   "id":"63e87069-8dee-4754-9be8-56b22901dfef",
+   "thid":"aad8e13a-01dc-4541-a961-70f1754dc5f1",
+   "body":{
+      
+   }
+}

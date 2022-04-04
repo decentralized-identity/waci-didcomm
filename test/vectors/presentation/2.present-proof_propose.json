@@ -1,0 +1,10 @@
+{
+    "type":"https://didcomm.org/present-proof/3.0/propose-presentation",
+    "from":"did:example:wallet",
+    "id":"aad8e13a-01dc-4541-a961-70f1754dc5f1",
+    "pthid":"599f3638-b563-4937-9487-dfe55099d900",
+    "thid":"aad8e13a-01dc-4541-a961-70f1754dc5f1",
+    "body":{
+       
+    }
+ }

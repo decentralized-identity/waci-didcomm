@@ -1,0 +1,38 @@
+{
+   "type":"https://didcomm.org/present-proof/3.0/request-presentation",
+   "from":"did:example:verifier",
+   "id":"730469f8-be38-41ae-91ef-713b7fb46475",
+   "thid":"aad8e13a-01dc-4541-a961-70f1754dc5f1",
+   "body":{
+      
+   },
+   "attachments":[
+      {
+         "id":"ed7d9b1f-9eed-4bde-b81c-3aa7485cf947",
+         "media_type":"application/json",
+         "format":"dif/presentation-exchange/definitions@v1.0",
+         "data":{
+            "json":{
+               "options":{
+                  "challenge":"3fa85f64-5717-4562-b3fc-2c963f66afa7",
+                  "domain":"4jt78h47fh47"
+               },
+               "presentation_definition":{
+                  "id":"3bc5ac72-bdd7-42de-aeba-45816cc4f776",
+                  "name":"Test Verifier",
+                  "input_descriptors":[
+                     {
+                        "id":"prc_data",
+                        "schema":[
+                           {
+                              "uri":"https://w3id.org/citizenship#PermanentResidentCard"
+                           }
+                        ]
+                     }
+                  ]
+               }
+            }
+         }
+      }
+   ]
+}
