@@ -24,6 +24,7 @@
          "type":"DIDCommMessaging"
       }
    ],
+   "assertionMethod": ["did:example:issuer#key1"],
    "keyAgreement":[
       "did:example:issuer#key1"
    ]
