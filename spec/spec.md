@@ -300,10 +300,12 @@ For example:
 ```json
 {
   "service": [{
-    "id": "did:example:123123123#someid",
-    "type": "DIDCommMessaging",
-    "serviceEndpoint": "https://example.com/endpoint",
-    "routingKeys": ["did:example:somemediator#somekey"]
+     "id": "did:example:123123123#someid",
+     "type": "DIDCommMessaging",
+     "serviceEndpoint": {
+       "uri": ["https://example.com/endpoint"],
+       "routingKeys": ["did:example:somemediator#somekey"]
+     }
   }]
 }
 ```
@@ -315,10 +317,15 @@ consisting of a unique identifier.
 - a service object MUST have a `type` property and its value MUST be the
 string `DIDCommMessaging`.
 - a service object MUST have a `serviceEndpoint` property, and its value MUST
-be a string consisting of a valid, resolvable URI.
-- a service object MAY have a `routingKeys` property. If present its value MUST
+be an ordered list of valid DIDComm Service Endpoint objects, with the order
+signaling preference in receiving messages.
+
+A DIDComm Service Endpoint object
+- MUST contain a URI and its value MUST be a string consisting of a valid, resolvable URI
+- MAY have a `routingKeys` property. If present its value MUST
 be an array of strings. Each string MUST be a URI designating a valid routing
 key. See below for more details.
+
 
 #### Routing Keys
 
