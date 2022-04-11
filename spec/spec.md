@@ -1173,9 +1173,9 @@ this property MUST be a string as described in
   "type": "https://didcomm.org/present-proof/3.0/request-presentation",
   "id": "0ac534c8-98ed-4fe3-8a41-3600775e1e92",
   "thid": "95e63a5f-73e1-46ac-b269-48bb22591bfa",
-  "from": "did:example:prover",
+  "from": "did:example:verifier",
   "to": [
-    "did:example:verifier"
+    "did:example:prover"
   ],
   "body": {},
   "attachments": [
