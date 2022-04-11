@@ -52,21 +52,18 @@ data objects. This version of the specification also restricts itself to
 [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) that make use of
 [BBS+ LD-Signatures](https://w3c-ccg.github.io/ldp-bbs2020).
 
-It is anticipated that future versions of this specification will add
-support for a much broader range of messaging and data-sharing formats than
-those used in the current stable draft.
-
 ## Status of This Document
 
-WACI v0.1.0 is a _DRAFT_ specification under development by the
+[WACI v0.1.0](https://identity.foundation/wallet-and-credential-interactions/)
+is a _DRAFT_ specification under development by the
 [DIF Claims and Credentials Working Group](https://identity.foundation/working-groups/claims-credentials.html).
 
 We feel that the specification is ready for feedback from other decentralized
-identity-related and -adjacent communities. urther validation and improvement of
+identity-related and -adjacent communities. Further validation and improvement of
 the specification will be done via implementation and testing.
 
 We encourage reviewers to submit issues on
-[GitHub](https://github.com/decentralized-identity/waci-presentation-exchange/issues).
+[GitHub](https://github.com/decentralized-identity/waci-dicomm/issues).
 
 ## Introduction
 
