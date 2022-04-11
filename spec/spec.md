@@ -147,10 +147,9 @@ resides in this work item's repo as a stop-gap measure, pending its move to didc
 ## Presentation Exchange
 
 Presentation Exchange objects support a large variety of possible content and
-signature types. As this version of our specification has a limited scope, a
-number of considerations need to be made for
+signature types. Many of these are out of scope of this profile, but the
 [presentation definitions](https://identity.foundation/presentation-exchange/#presentation-definition)
-to provide what we need.
+is directly relevant and relied upon.
 
 ### format property
 
@@ -160,14 +159,12 @@ following property:
 - `ldp_vp`: This property indicates that a W3C Verifiable Presentation will be
 submitted in the form of a JSON object. The value of this property MUST be an
 object with a `proof_type` property that has a value of either
-`BbsBlsSignature2020`, `JsonWebSignature2020`, or `Ed25519Signature2018`.
+`JsonWebSignature2020` or `Ed25519Signature2018`.
 
-For example:
+Here is an abbreviated example (see the [test vectors](https://github.com/decentralized-identity/waci-didcomm/tree/main/test/vectors) in the repository for more context):
 ```json5
 {
   "presentation_definition": {
-    "id": "32f54163-7166-48f1-93d8-ff217bdb0653",
-    "input_descriptors": [],
     "format": {
       "ldp_vp": {
         "proof_type": ["BbsBlsSignature2020", "JsonWebSignature2020", "Ed25519Signature2018"]
@@ -176,85 +173,6 @@ For example:
   }
 }
 ```
-
-To allow for selective disclosure of Verifiable Credential claims the use of a 
-`BbsBlsSignature2020` or `BbsBlsBoundSignature2020` is required for the
-credential. These signatures allows for a zero knowledge proof of the original 
-signature, allowing the prover to derive a corresponding
-`BbsBlsSignatureProof2020` or `BbsBlsBoundSignatureProof2020` that will verify
-the disclosed claims. `BbsBlsBoundSignature2020` and
-`BbsBlsBoundSignatureProof2020` also provide a mechanism for privately binding
-credentials and presentations to the holder. 
-
-### frame property
-
-In order to support selective disclosure of Verifiable Credential claims the use
-of a JSON-LD frame object is combined with the above signature types.
-
-The method for a verifier to provide a JSON-LD frame is to add a `frame`
-property to the `presentation definition` object. The value of the `frame`
-property MUST be a
-[JSON-LD frame](https://json-ld.org/spec/FCGS/json-ld-framing/20180607/#framing)
-for an object that complies with the [W3C VC Data Model](https://www.w3.org/TR/vc-data-model/).
-
-For Example:
-```json5
-{
-  "presentation_definition": {
-    "id": "32f54163-7166-48f1-93d8-ff217bdb0653",
-    "input_descriptors": [],
-    "frame": {
-      "@context": [
-        "https://www.w3.org/2018/credentials/v1",
-        "https://w3id.org/vaccination/v1",
-        "https://w3id.org/security/suites/bls12381-2020/v1"
-      ],
-      "type": [
-        "VerifiableCredential",
-        "VaccinationCertificate"
-      ],
-      "credentialSubject": {
-        "@explicit": true,
-        "type": [
-          "VaccinationEvent"
-        ],
-        "batchNumber": {},
-        "countryOfVaccination": {}
-      }
-    }
-  }
-}
-```
-
-::: note Basic Note 
-
-It is important that the JSON-LD frame object be compatible
-with the input descriptors of the presentation definition. There is an assumed
-direct mapping between the JSON-LD frame object and the corresponding input
-descriptor object in the presentation definition. If a presentation definition
-has a JSON-LD frame that is inconsistent with the input descriptors, it may be
-impossible to produce an acceptable verifiable presentation for it.
-      
-We anticipate that it may be possible to deterministically derive a valid
-JSON-LD frame from an input descriptor, but a formal specification for doing so
-does not, at this time, exist.
-
-:::
-
-The v2.0.0 Presentation Exchange specification defines a `frame` property for a `presentation definition`. This means that implementers of Presentation Exchange who wish to use the protocol described here can use the latest 
-[JSON Schema from Presentation Exchange](https://identity.foundation/presentation-exchange/#json-schema-2)
-to validate `presentation definition` objects that contain a frame property.
-
-
-More information about how frames work with BBS+ signatures can be found in the
-[Linked Data Proof BBS+ Signatures 2020 Suite](https://w3c-ccg.github.io/ldp-bbs2020/#the-bbs-signature-proof-suite-2020)
-and the [Mattr example implementation](https://github.com/mattrglobal/jsonld-signatures-bbs).
-
-For a more general overview of LD-Framing strategies as a general approach to
-querying and matching Linked-Data, see the
-[JSON-LD Framing](https://json-ld.org/spec/FCGS/json-ld-framing/20180607/#framing)
-guide written by the JSON-LD Community Group at W3C on the occasion of version
-1.1 of the JSON-LD specification.
 
 ## DIDComm Context
 
@@ -270,10 +188,9 @@ All parties MUST have a `DID document` that complies with this specification.
 ### service property
 
 A `DID document` that complies with this specification MUST have a `service`
-property.
+property, consisting of a structured object as per the DIDComm v2 specification (see [the DID Document section](https://identity.foundation/didcomm-messaging/spec/#did-document-service-endpoint)).
 
-For example:
-
+Here is an abbreviated example showing the `service` section of a conformant DID Document (see the [test vectors](https://github.com/decentralized-identity/waci-didcomm/tree/main/test/vectors) in the repository for more context):
 ```json
 {
   "service": [{
