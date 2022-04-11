@@ -78,7 +78,7 @@ and Credentials Working Group at DIF agreed to host a work item for continuing
 to work out the details. We outline some of the reasons for choosing each of the
 components below. 
 
-![Layering Diagram](./resources/layer_cake_v0-2.png)
+![Layering Diagram](./resources/layer_cake_v0-1.png)
 
 ### Verifiable Presentations
 The starting point for most participants in determining which components to
