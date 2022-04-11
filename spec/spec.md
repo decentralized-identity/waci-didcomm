@@ -86,26 +86,21 @@ select was the
 describes a `Verifiable Presentation` object that is designed for sharing
 information from `Verifiable Credentials`. 
 
-### BBS+ LD-Signatures
-Though a [number of signature types](https://www.lfph.io/wp-content/uploads/2021/02/Verifiable-Credentials-Flavors-Explained.pdf)
-are used with `Verifiable Credentials`, many in the community seem to be
-converging on [BBS+ LD-Signatures](https://w3c-ccg.github.io/ldp-bbs2020). The
-reasons for this convergence are more fully described
-[elsewhere](https://www.evernym.com/blog/bbs-verifiable-credentials/), but the
-summary is that they bridge the two primary concerns of `Verifiable Credential`
-implementers: ease of use and user privacy.
+### Credential Manifest
+In issuance situations, the credentials on offer by a given issuer can be
+defined in objects that can be passed back and forth, in the "Presentation 
+Exchange" data model/abstraction layering. These issuance-definition 
+objects are defined for issuance flows and wallet-issuer/wallet-verifier, a "sister specification" that spun out of the Presentation Exchange work-item group defines those objects: [Credential Manifest](https://identity.foundation/credential-manifest/#credential-manifest-2), also a work item of the DIF Claims and Credentials WG.
 
 ### Presentation Exchange
 The next component is a data model that provides a solution to the problem of
 how to format a request that verifiable information be presented. The
 [Presentation Exchange specification](https://identity.foundation/presentation-exchange/spec/v1.0.0/)
 was recently published by the Decentralized Identity Foundation. It defines a
-`Presentation Definition` data object which may be used by a relying party to
-request information, and a `Presentation Submission` object which describes the
-relationship between the `Presentation Definition` and the submitted verifiable
-information.
-
-Similarly, in issuance situations the credentials on offer by a given issuer need to be defined in objects that can be passed back and forth. In these flows, a "sister specification" that spun out of the Presentation Exchange work-item group defines those objects: [Credential Manifest](https://identity.foundation/credential-manifest/#credential-manifest-2), also a work item of the DIF Claims and Credentials WG.
+`Presentation Definition` data object which may be used by a verifier (i.e., a 
+"relying party" in OIDC parlance) to request information, and a `Presentation 
+Submission` object which describes the relationship between the `Presentation 
+Definition` and the submitted verifiable information.
 
 Since
 [Presentation Exchange](https://identity.foundation/presentation-exchange/spec/v1.0.0/)
@@ -113,61 +108,44 @@ supports the use of `Verifiable Presentations` as a response to a `Presentation
 Definition`, while remaining agnostic to transport protocols, it is ideal for
 our purposes.
 
-### Communication, Transport, and Protocol
-Previously described components were, for the most part, agreed upon readily.
-The bulk of the conversations at IIW centered around communication and protocol
-options and sought to answer the following questions:
-- "How should the data objects be communicated from one party to another?"
-- "How ought they to be transported securely?"
-- "What protocol could be used for the exchange?"
-
-#### DIDComm
-Before participants settled on using elements of
+### Protocol Considerations
+Before fixing the scope of this work item and settling on using elements of
 [DIDComm v2.0](https://identity.foundation/didcomm-messaging/spec/) to securely
 communicate the data objects, there was a long and lively discussion about other
-options. 
+options at IIW. 
 
-[CHAPI](https://w3c-ccg.github.io/credential-handler-api/) is an API for
+- [CHAPI](https://w3c-ccg.github.io/credential-handler-api/) is an API for
 exchanging data between websites and browsers. It was seen as too limited to a
 particular technology to be widely useful for wallet applications on smart
 phones and other devices without significant changes.
 
-[VC-HTTP-API](https://w3c-ccg.github.io/vc-http-api/) was seen as promising, but
-in its current state lacks an API for a `Verifiable Credential` holder. A number
-of participants expressed a desire for the WACI specification to strive to be
+- [VC-API](https://w3c-ccg.github.io/vc-api/) (fka VC-HTTP-API) was seen as promising, 
+but in its current state lacked any API for a `Verifiable Credential` holder. A 
+number of participants expressed a desire for the WACI specification to strive to be
 compatible with this API, and that remains a goal of this group.
 
-[DIDComm v2.0](https://identity.foundation/didcomm-messaging/spec/) describes
+- [DIDComm v2.0](https://identity.foundation/didcomm-messaging/spec/) describes
 a method for securely communicating authenticated messages between entities that
 control [Decentralized Identifiers](https://www.w3.org/TR/did-core/) along any
 transport layer. It allows for two parties to mutually authenticate and securely
 communicate. DIDComm has a large community interested in using it, and many have
 already implemented DIDComm v1.0. 
 
-#### Aries Present Proof
-
-[OIDC-SIOP](https://openid.bitbucket.io/connect/openid-connect-self-issued-v2-1_0.html)
+- [OIDC-SIOP](https://openid.bitbucket.io/connect/openid-connect-self-issued-v2-1_0.html)
 seeks to bridge existing federated identity capabilities on the internet with
 principles of self-sovereign identity, and may ultimately be a good fit for this
 protocol. It was not selected for this version of the specification primarily
 because v1 of the specification has been deprecated, and v2 of the specification
-is being incorporated into the next major version of OIDC, so it is not yet
-ready.
+was somewhat unstable at the time.
 
-[Aries Protocols](https://github.com/hyperledger/aries-rfcs), specifically the
-[present proof protocol](https://github.com/hyperledger/aries-rfcs/tree/master/features/0454-present-proof-v2)
-were explored as a possible option. The group determined that the protocol's
-existing support for DIDComm and Presentation Exchange, along with its use
-within different implementations by a number of organizations made it an ideal
-choice for this first iteration. 
+- [Aries Protocols](https://github.com/hyperledger/aries-rfcs), specifically the current stable drafts of
+[present proof protocol V2](https://github.com/hyperledger/aries-rfcs/tree/master/features/0454-present-proof-v2)
+and [issue credential V2](https://github.com/hyperledger/aries-rfcs/tree/main/features/0453-issue-credential-v2).
+An [unstable draft of V3](https://github.com/decentralized-identity/waci-didcomm/blob/main/present_proof/present-proof-v3.md)
+resides in this work item's repo as a stop-gap measure, pending its move to didcomm.org. 
 
-### WACI
-The [WACI](https://github.com/decentralized-identity/wallet-and-credential-interactions)
-specification provides a framework within which the components above reside. It
-was presented separately at IIW and almost immediately became a cornerstone of
-this effort.
+## Presentation Exchange
 
-## Presentation Exchange Context
 Presentation Exchange objects support a large variety of possible content and
 signature types. As this version of our specification has a limited scope, a
 number of considerations need to be made for
