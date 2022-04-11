@@ -31,7 +31,7 @@ A [DIDComm v2.0](https://github.com/decentralized-identity/didcomm-messaging) Pr
 
 ## Abstract
 
-There are interactions between a "holder"/subject and an "issuer"/identity provider,
+There are interactions between a "holder" and an "issuer",
 or between a "holder"/subject and a "verifier"/relying party, that require passing 
 verifiable information between the two. This specification provides an initial protocol
 definition for the two main interactions (issuance and presentation) required
