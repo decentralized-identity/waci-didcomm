@@ -63,7 +63,7 @@ identity-related and -adjacent communities. Further validation and improvement o
 the specification will be done via implementation and testing.
 
 We encourage reviewers to submit issues on
-[GitHub](https://github.com/decentralized-identity/waci-dicomm/issues).
+[GitHub](https://github.com/decentralized-identity/waci-didcomm/issues).
 
 ## Introduction
 
