@@ -50,7 +50,7 @@ message formats and
 [DIF Presentation Exchange](https://identity.foundation/presentation-exchange/spec/v1.0.0/)
 data objects. This version of the specification also restricts itself to 
 [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) that make use of
-[BBS+ LD-Signatures](https://w3c-ccg.github.io/ldp-bbs2020).
+the [JsonWebSignature2020](https://w3c-ccg.github.io/lds-jws2020/) signature suite and [Ed25519Signature2018](https://w3c-ccg.github.io/lds-ed25519-2018/) signature suite.
 
 ## Status of This Document
 
