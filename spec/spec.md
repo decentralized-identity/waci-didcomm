@@ -141,7 +141,7 @@ was somewhat unstable at the time.
 - [Aries Protocols](https://github.com/hyperledger/aries-rfcs), specifically the current stable drafts of
 [present proof protocol V2](https://github.com/hyperledger/aries-rfcs/tree/master/features/0454-present-proof-v2)
 and [issue credential V2](https://github.com/hyperledger/aries-rfcs/tree/main/features/0453-issue-credential-v2).
-An [unstable draft of V3](https://github.com/decentralized-identity/waci-didcomm/blob/main/present_proof/present-proof-v3.md)
+A [draft of V3](https://github.com/decentralized-identity/waci-didcomm/blob/main/present_proof/present-proof-v3.md)
 resides in this work item's repo as a stop-gap measure, pending its move to didcomm.org. 
 
 ## Presentation Exchange
