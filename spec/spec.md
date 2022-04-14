@@ -54,9 +54,9 @@ data objects. This version of the specification also restricts itself to
 
 ## Status of This Document
 
-[WACI DRAFT](https://identity.foundation/wallet-and-credential-interactions/)
-is a _DRAFT_ specification under development by the
-[DIF Claims and Credentials Working Group](https://identity.foundation/working-groups/claims-credentials.html).
+[WACI-DIDComm Profile DRAFT](https://identity.foundation/waci-didcomm/)
+is a _DRAFT_ interoperability profile under development by the
+[Claims and Credentials Working Group](https://identity.foundation/working-groups/claims-credentials.html) at [DIF](https://identity.foundation).
 
 We feel that the specification is ready for feedback from other decentralized
 identity-related and -adjacent communities. Further validation and improvement of
