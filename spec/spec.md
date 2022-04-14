@@ -90,7 +90,7 @@ information from `Verifiable Credentials`.
 In issuance situations, the credentials on offer by a given issuer can be
 defined in objects that can be passed back and forth, in the "Presentation 
 Exchange" data model/abstraction layering. These issuance-definition 
-objects are defined for issuance flows and wallet-issuer/wallet-verifier, a "sister specification" that spun out of the Presentation Exchange work-item group defines those objects: [Credential Manifest](https://identity.foundation/credential-manifest/#credential-manifest-2), also a work item of the DIF Claims and Credentials WG.
+objects are defined for issuance flows. A "sister specification" of the Presentation Exchange work-item group defines those objects: [Credential Manifest](https://identity.foundation/credential-manifest/#credential-manifest-2).
 
 ### Presentation Exchange
 The next component is a data model that provides a solution to the problem of
