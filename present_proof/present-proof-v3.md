@@ -119,7 +119,7 @@ An optional message sent by the prover to the verifier to initiate a proof prese
     "attachments": [
         {
             "id": "<attachment identifier>",
-            "mime-type": "application/json",
+            "media_type": "application/json",
             "format": "<format-and-version>",
             "data": {
                 "json": "<json>"
@@ -164,7 +164,7 @@ From a verifier to a prover, the `request-presentation` message describes values
     "attachments": [
         {
             "id": "<attachment identifier>",
-            "mime-type": "application/json",
+            "media_type": "application/json",
             "format": "<format-and-version>",
             "data":  {
                 "base64": "<base64 data>"
@@ -203,7 +203,7 @@ This message is a response to a Presentation Request message and contains signed
     "attachments": [
         {
             "id": "<attachment identifier>",
-            "mime-type": "application/json",
+            "media_type": "application/json",
             "format": "<format-and-version>",
             "data": {
                 "sha256": "f8dca1d901d18c802e6a8ce1956d4b0d17f03d9dc5e4e1f618b6a022153ef373",

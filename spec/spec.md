@@ -418,7 +418,7 @@ Details of sending an encrypted message to a `serviceEndpoint` via HTTP:
 
 - Messages are transported via HTTP POST.
 - The MIME Type for the POST request is set to the corresponding media type
-defined in [Media Types](https://identity.foundation/didcomm-messaging/spec/#media-types),
+defined in [Media Types](https://identity.foundation/didcomm-messaging/spec/#iana-media-types),
 e.g., `application/didcomm-encrypted+json`.
 - A successful message receipt MUST return a code in the 2xx HTTP Status Code
 range. It is RECOMMENDED that a HTTP POST return a `202 Accepted` status code.
@@ -432,11 +432,11 @@ Perfect Forward Secrecy (PFS) on the transmission leg.
 
 ### Web Redirect
 
-The DIDComm v2 supports [web-redirect](https://identity.foundation/didcomm-messaging/spec/#redirecting-back-to-sender) 
+The DIDComm v2 supports [web_redirect](https://identity.foundation/didcomm-messaging/spec/#redirecting-back-to-sender) 
 feature to redirect the receiver application back to the sender application. In the case of WACI, 
 the Issuer/Verifier may ask the Wallet to redirect back using this property. 
 
-Example acknowledgement message containing web-redirect information:
+Example acknowledgement message containing web_redirect information:
 
 ```json=
 {
@@ -445,21 +445,21 @@ Example acknowledgement message containing web-redirect information:
   "pthid":"95e63a5f-73e1-46ac-b269-48bb22591bfa",
   "from":"did:example:verifier",
   "to":["did:example:prover"],
-  "web-redirect":{
+  "web_redirect":{
     "status":"OK",
     "redirectUrl":"https://example.com/handle-success/51e63a5f-93e1-46ac-b269-66bb22591bfa"
   }
 }
 ```
 
-Example problem-report message containing web-redirect information.
+Example problem-report message containing web_redirect information.
 
 ```json=
 {
   "type": "https://didcomm.org/report-problem/2.0/problem-report",
   "id": "7c9de639-c51c-4d60-ab95-103fa613c805",
   "pthid": "1e513ad4-48c9-444e-9e7e-5b8b45c5e325",
-  "web-redirect":{
+  "web_redirect":{
       "status":"FAIL",
       "redirectUrl":"https://example.com/handle-error/99e80a9f-34e1-41ac-b277-91bb64481bxb"
    },
@@ -556,7 +556,7 @@ sequenceDiagram
 ### Issuance
 #### Step 1 : Generate Out-Of-Band (OOB) message
 
-The issuer generates a DIDComm v2 Out-Of-Band(OOB) invitation message with `goal-code` as `streamlined-vc`. This message can be encoded as a QR code or a redirect URL.
+The issuer generates a DIDComm v2 Out-Of-Band(OOB) invitation message with `goal_code` as `streamlined-vc`. This message can be encoded as a QR code or a redirect URL.
 
 ```json5
 {
@@ -564,7 +564,7 @@ The issuer generates a DIDComm v2 Out-Of-Band(OOB) invitation message with `goal
    "id":"f137e0db-db7b-4776-9530-83c808a34a42",
    "from":"did:example:issuer",
    "body":{
-      "goal-code":"streamlined-vc",
+      "goal_code":"streamlined-vc",
       "accept":[
          "didcomm/v2"
       ]
@@ -1070,7 +1070,7 @@ block, which DIDComm v2 calls an "out of band invitation."
   "id": "599f3638-b563-4937-9487-dfe55099d900",
   "from": "did:example:verifier",
   "body": {
-      "goal-code": "streamlined-vp",
+      "goal_code": "streamlined-vp",
       "accept": ["didcomm/v2"]
   }
 }

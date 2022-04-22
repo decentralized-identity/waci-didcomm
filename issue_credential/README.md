@@ -131,7 +131,7 @@ Message format:
     "attachments": [
         {
             "id": "<attachment identifier>",
-            "mime-type": "application/json",
+            "media_type": "application/json",
             "format": "<format-and-version>",
             "data": {
                 "json": "<json>"
@@ -175,7 +175,7 @@ Message Format:
     "attachments": [
         {
             "id": "<attachment identifier>",
-            "mime-type": "application/json",
+            "media_type": "application/json",
             "format": "<format-and-version>",
             "data": {
                 "json": "<json>"
@@ -222,7 +222,7 @@ Message Format:
   "attachments": [
     {
       "id": "<attachment identifier>",
-      "mime-type": "application/json",
+      "media_type": "application/json",
       "format": "<format-and-version>",
       "data": {
         "json": "<json>"
@@ -267,7 +267,7 @@ Message Format:
   "attachments": [
     {
       "id": "<attachment identifier>",
-      "mime-type": "application/json",
+      "media_type": "application/json",
       "format": "<format-and-version>",
       "data": {
         "json": "<json>"
@@ -304,7 +304,7 @@ This is not a message but an inner object for other messages in this protocol. I
     "attributes": [
       {
         "name": "<attribute name>",
-        "mime-type": "<type>",
+        "media_type": "<type>",
         "value": "<value>"
       }
       // more attributes
@@ -321,12 +321,12 @@ The mandatory `"name"` key maps to the attribute name as a string.
 
 ##### MIME Type and Value
 
-The optional `mime-type` advises the issuer how to render a binary attribute, to judge its content for applicability before issuing a credential containing it. Its value parses case-insensitively in keeping with MIME type semantics of [RFC 2045](https://tools.ietf.org/html/rfc2045). If `mime-type` is missing, its value is null.
+The optional `media_type` advises the issuer how to render a binary attribute, to judge its content for applicability before issuing a credential containing it. Its value parses case-insensitively in keeping with MIME type semantics of [RFC 2045](https://tools.ietf.org/html/rfc2045). If `media_type` is missing, its value is null.
 
 The mandatory `value` holds the attribute value:
 
-- if `mime-type` is missing (null), then `value` is a string. In other words, implementations interpret it the same as any other key+value pair in JSON
-- if `mime-type` is not null, then `value` is always a base64url-encoded string that represents a binary BLOB, and `mime-type` tells how to interpret the BLOB after base64url-decoding.
+- if `media_type` is missing (null), then `value` is a string. In other words, implementations interpret it the same as any other key+value pair in JSON
+- if `media_type` is not null, then `value` is always a base64url-encoded string that represents a binary BLOB, and `media_type` tells how to interpret the BLOB after base64url-decoding.
 
 ## Threading
 
