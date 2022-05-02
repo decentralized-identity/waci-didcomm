@@ -6,7 +6,7 @@ A [DIDComm v2.0](https://github.com/decentralized-identity/didcomm-messaging) Pr
 
 **Specification Status:** [Draft V0.1.0](https://identity.foundation/waci-presentation-exchange/v0.1) (also snapshotted and archived on 12/06/21 on [web.archive.org](https://web.archive.org/web/20211206215823/https://identity.foundation/waci-presentation-exchange/))
 
-**Latest Draft:** [https://identity.foundation/waci-presentation-exchange/](https://identity.foundation/waci-presentation-exchange/)
+**Latest Draft:** [https://identity.foundation/waci-didcomm/](https://identity.foundation/waci-didcomm/)
 
 **Editors:**
 ~ [Orie Steele](https://www.linkedin.com/in/or13b/) (Transmute)
@@ -19,6 +19,7 @@ A [DIDComm v2.0](https://github.com/decentralized-identity/didcomm-messaging) Pr
 ~ [Sam Curren](https://www.linkedin.com/in/samcurren/) (Indicio.tech)
 ~ [Brian Richter](https://www.linkedin.com/in/brianrichter3/) (Aviary Tech)
 ~ [Rolson Quadras](https://www.linkedin.com/in/rolsonquadras/) ([SecureKey](https://securekey.com/))
+~ [Juan Caballero](https://www.linkedin.com/in/juan-caballero/) (Centre.io)
 
 
 **Participate:**
@@ -30,8 +31,9 @@ A [DIDComm v2.0](https://github.com/decentralized-identity/didcomm-messaging) Pr
 
 ## Abstract
 
-There are interactions between a wallet and relying party that require passing
-information between the two. This specification provides an initial protocol
+There are interactions between a "holder" and an "issuer",
+or between a "holder" and a "verifier" that require passing 
+verifiable information between the two. This specification provides an initial protocol
 definition for the two main interactions (issuance and presentation) required
 for verifiable credentials.
 
@@ -48,23 +50,20 @@ message formats and
 [DIF Presentation Exchange](https://identity.foundation/presentation-exchange/spec/v1.0.0/)
 data objects. This version of the specification also restricts itself to 
 [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) that make use of
-[BBS+ LD-Signatures](https://w3c-ccg.github.io/ldp-bbs2020).
-
-It is anticipated that future versions of this specification will add
-support for a much broader range of messaging and data-sharing formats than
-those used in the current stable draft.
+the [JsonWebSignature2020](https://w3c-ccg.github.io/lds-jws2020/) signature suite and [Ed25519Signature2018](https://w3c-ccg.github.io/lds-ed25519-2018/) signature suite.
 
 ## Status of This Document
 
-WACI v0.1.0 is a _DRAFT_ specification under development by the
-[DIF Claims and Credentials Working Group](https://identity.foundation/working-groups/claims-credentials.html).
+[WACI-DIDComm Profile DRAFT](https://identity.foundation/waci-didcomm/)
+is a _DRAFT_ interoperability profile under development by the
+[Claims and Credentials Working Group](https://identity.foundation/working-groups/claims-credentials.html) at [DIF](https://identity.foundation).
 
 We feel that the specification is ready for feedback from other decentralized
-identity-related and -adjacent communities. urther validation and improvement of
+identity-related and -adjacent communities. Further validation and improvement of
 the specification will be done via implementation and testing.
 
 We encourage reviewers to submit issues on
-[GitHub](https://github.com/decentralized-identity/waci-presentation-exchange/issues).
+[GitHub](https://github.com/decentralized-identity/waci-didcomm/issues).
 
 ## Introduction
 
@@ -87,26 +86,21 @@ select was the
 describes a `Verifiable Presentation` object that is designed for sharing
 information from `Verifiable Credentials`. 
 
-### BBS+ LD-Signatures
-Though a [number of signature types](https://www.lfph.io/wp-content/uploads/2021/02/Verifiable-Credentials-Flavors-Explained.pdf)
-are used with `Verifiable Credentials`, many in the community seem to be
-converging on [BBS+ LD-Signatures](https://w3c-ccg.github.io/ldp-bbs2020). The
-reasons for this convergence are more fully described
-[elsewhere](https://www.evernym.com/blog/bbs-verifiable-credentials/), but the
-summary is that they bridge the two primary concerns of `Verifiable Credential`
-implementers: ease of use and user privacy.
+### Credential Manifest
+In issuance situations, the credentials on offer by a given issuer can be
+defined in objects that can be passed back and forth, in the "Presentation 
+Exchange" data model/abstraction layering. These issuance-definition 
+objects are defined for issuance flows. A "sister specification" of the Presentation Exchange work-item group defines those objects: [Credential Manifest](https://identity.foundation/credential-manifest/#credential-manifest-2).
 
 ### Presentation Exchange
 The next component is a data model that provides a solution to the problem of
 how to format a request that verifiable information be presented. The
 [Presentation Exchange specification](https://identity.foundation/presentation-exchange/spec/v1.0.0/)
 was recently published by the Decentralized Identity Foundation. It defines a
-`Presentation Definition` data object which may be used by a relying party to
-request information, and a `Presentation Submission` object which describes the
-relationship between the `Presentation Definition` and the submitted verifiable
-information.
-
-Similarly, in issuance situations the credentials on offer by a given issuer need to be defined in objects that can be passed back and forth. In these flows, a "sister specification" that spun out of the Presentation Exchange work-item group defines those objects: [Credential Manifest](https://identity.foundation/credential-manifest/#credential-manifest-2), also a work item of the DIF Claims and Credentials WG.
+`Presentation Definition` data object which may be used by a verifier (i.e., a 
+"relying party" in OIDC parlance) to request information, and a `Presentation 
+Submission` object which describes the relationship between the `Presentation 
+Definition` and the submitted verifiable information.
 
 Since
 [Presentation Exchange](https://identity.foundation/presentation-exchange/spec/v1.0.0/)
@@ -114,66 +108,48 @@ supports the use of `Verifiable Presentations` as a response to a `Presentation
 Definition`, while remaining agnostic to transport protocols, it is ideal for
 our purposes.
 
-### Communication, Transport, and Protocol
-Previously described components were, for the most part, agreed upon readily.
-The bulk of the conversations at IIW centered around communication and protocol
-options and sought to answer the following questions:
-- "How should the data objects be communicated from one party to another?"
-- "How ought they to be transported securely?"
-- "What protocol could be used for the exchange?"
-
-#### DIDComm
-Before participants settled on using elements of
+### Protocol Considerations
+Before fixing the scope of this work item and settling on using elements of
 [DIDComm v2.0](https://identity.foundation/didcomm-messaging/spec/) to securely
 communicate the data objects, there was a long and lively discussion about other
-options. 
+options at IIW. 
 
-[CHAPI](https://w3c-ccg.github.io/credential-handler-api/) is an API for
+- [CHAPI](https://w3c-ccg.github.io/credential-handler-api/) is an API for
 exchanging data between websites and browsers. It was seen as too limited to a
 particular technology to be widely useful for wallet applications on smart
 phones and other devices without significant changes.
 
-[VC-HTTP-API](https://w3c-ccg.github.io/vc-http-api/) was seen as promising, but
-in its current state lacks an API for a `Verifiable Credential` holder. A number
-of participants expressed a desire for the WACI specification to strive to be
+- [VC-API](https://w3c-ccg.github.io/vc-api/) (fka VC-HTTP-API) was seen as promising, 
+but in its current state lacked any API for a `Verifiable Credential` holder. A 
+number of participants expressed a desire for the WACI specification to strive to be
 compatible with this API, and that remains a goal of this group.
 
-[DIDComm v2.0](https://identity.foundation/didcomm-messaging/spec/) describes
+- [DIDComm v2.0](https://identity.foundation/didcomm-messaging/spec/) describes
 a method for securely communicating authenticated messages between entities that
 control [Decentralized Identifiers](https://www.w3.org/TR/did-core/) along any
 transport layer. It allows for two parties to mutually authenticate and securely
 communicate. DIDComm has a large community interested in using it, and many have
 already implemented DIDComm v1.0. 
 
-#### Aries Present Proof
-
-[OIDC-SIOP](https://openid.bitbucket.io/connect/openid-connect-self-issued-v2-1_0.html)
+- [OIDC-SIOP](https://openid.bitbucket.io/connect/openid-connect-self-issued-v2-1_0.html)
 seeks to bridge existing federated identity capabilities on the internet with
 principles of self-sovereign identity, and may ultimately be a good fit for this
 protocol. It was not selected for this version of the specification primarily
 because v1 of the specification has been deprecated, and v2 of the specification
-is being incorporated into the next major version of OIDC, so it is not yet
-ready.
+was somewhat unstable at the time.
 
-[Aries Protocols](https://github.com/hyperledger/aries-rfcs), specifically the
-[present proof protocol](https://github.com/hyperledger/aries-rfcs/tree/master/features/0454-present-proof-v2)
-were explored as a possible option. The group determined that the protocol's
-existing support for DIDComm and Presentation Exchange, along with its use
-within different implementations by a number of organizations made it an ideal
-choice for this first iteration. 
+- [Aries Protocols](https://github.com/hyperledger/aries-rfcs), specifically the current stable drafts of
+[present proof protocol V2](https://github.com/hyperledger/aries-rfcs/tree/master/features/0454-present-proof-v2)
+and [issue credential V2](https://github.com/hyperledger/aries-rfcs/tree/main/features/0453-issue-credential-v2).
+A [draft of V3](https://github.com/decentralized-identity/waci-didcomm/blob/main/present_proof/present-proof-v3.md)
+resides in this work item's repo as a stop-gap measure, pending its move to didcomm.org. 
 
-### WACI
-The [WACI](https://github.com/decentralized-identity/wallet-and-credential-interactions)
-specification provides a framework within which the components above reside. It
-was presented separately at IIW and almost immediately became a cornerstone of
-this effort.
+## Presentation Exchange
 
-## Presentation Exchange Context
 Presentation Exchange objects support a large variety of possible content and
-signature types. As this version of our specification has a limited scope, a
-number of considerations need to be made for
+signature types. Many of these are out of scope of this profile, but the
 [presentation definitions](https://identity.foundation/presentation-exchange/#presentation-definition)
-to provide what we need.
+is directly relevant and relied upon.
 
 ### format property
 
@@ -183,14 +159,12 @@ following property:
 - `ldp_vp`: This property indicates that a W3C Verifiable Presentation will be
 submitted in the form of a JSON object. The value of this property MUST be an
 object with a `proof_type` property that has a value of either
-`BbsBlsSignature2020`, `JsonWebSignature2020`, or `Ed25519Signature2018`.
+`JsonWebSignature2020` or `Ed25519Signature2018`.
 
-For example:
+Here is an abbreviated example (see the [test vectors](https://github.com/decentralized-identity/waci-didcomm/tree/main/test/vectors) in the repository for more context):
 ```json5
 {
   "presentation_definition": {
-    "id": "32f54163-7166-48f1-93d8-ff217bdb0653",
-    "input_descriptors": [],
     "format": {
       "ldp_vp": {
         "proof_type": ["BbsBlsSignature2020", "JsonWebSignature2020", "Ed25519Signature2018"]
@@ -199,85 +173,6 @@ For example:
   }
 }
 ```
-
-To allow for selective disclosure of Verifiable Credential claims the use of a 
-`BbsBlsSignature2020` or `BbsBlsBoundSignature2020` is required for the
-credential. These signatures allows for a zero knowledge proof of the original 
-signature, allowing the prover to derive a corresponding
-`BbsBlsSignatureProof2020` or `BbsBlsBoundSignatureProof2020` that will verify
-the disclosed claims. `BbsBlsBoundSignature2020` and
-`BbsBlsBoundSignatureProof2020` also provide a mechanism for privately binding
-credentials and presentations to the holder. 
-
-### frame property
-
-In order to support selective disclosure of Verifiable Credential claims the use
-of a JSON-LD frame object is combined with the above signature types.
-
-The method for a verifier to provide a JSON-LD frame is to add a `frame`
-property to the `presentation definition` object. The value of the `frame`
-property MUST be a
-[JSON-LD frame](https://json-ld.org/spec/FCGS/json-ld-framing/20180607/#framing)
-for an object that complies with the [W3C VC Data Model](https://www.w3.org/TR/vc-data-model/).
-
-For Example:
-```json5
-{
-  "presentation_definition": {
-    "id": "32f54163-7166-48f1-93d8-ff217bdb0653",
-    "input_descriptors": [],
-    "frame": {
-      "@context": [
-        "https://www.w3.org/2018/credentials/v1",
-        "https://w3id.org/vaccination/v1",
-        "https://w3id.org/security/suites/bls12381-2020/v1"
-      ],
-      "type": [
-        "VerifiableCredential",
-        "VaccinationCertificate"
-      ],
-      "credentialSubject": {
-        "@explicit": true,
-        "type": [
-          "VaccinationEvent"
-        ],
-        "batchNumber": {},
-        "countryOfVaccination": {}
-      }
-    }
-  }
-}
-```
-
-::: note Basic Note 
-
-It is important that the JSON-LD frame object be compatible
-with the input descriptors of the presentation definition. There is an assumed
-direct mapping between the JSON-LD frame object and the corresponding input
-descriptor object in the presentation definition. If a presentation definition
-has a JSON-LD frame that is inconsistent with the input descriptors, it may be
-impossible to produce an acceptable verifiable presentation for it.
-      
-We anticipate that it may be possible to deterministically derive a valid
-JSON-LD frame from an input descriptor, but a formal specification for doing so
-does not, at this time, exist.
-
-:::
-
-The v2.0.0 Presentation Exchange specification defines a `frame` property for a `presentation definition`. This means that implementers of Presentation Exchange who wish to use the protocol described here can use the latest 
-[JSON Schema from Presentation Exchange](https://identity.foundation/presentation-exchange/#json-schema-2)
-to validate `presentation definition` objects that contain a frame property.
-
-
-More information about how frames work with BBS+ signatures can be found in the
-[Linked Data Proof BBS+ Signatures 2020 Suite](https://w3c-ccg.github.io/ldp-bbs2020/#the-bbs-signature-proof-suite-2020)
-and the [Mattr example implementation](https://github.com/mattrglobal/jsonld-signatures-bbs).
-
-For a more general overview of LD-Framing strategies as a general approach to
-querying and matching Linked-Data, see the
-[JSON-LD Framing](https://json-ld.org/spec/FCGS/json-ld-framing/20180607/#framing)
-guide written by the JSON-LD Community Group at W3C on the occasion of version
-1.1 of the JSON-LD specification.
 
 ## DIDComm Context
 
@@ -293,10 +188,9 @@ All parties MUST have a `DID document` that complies with this specification.
 ### service property
 
 A `DID document` that complies with this specification MUST have a `service`
-property.
+property, consisting of a structured object as per the DIDComm v2 specification (see [the DID Document section](https://identity.foundation/didcomm-messaging/spec/#did-document-service-endpoint)).
 
-For example:
-
+Here is an abbreviated example showing the `service` section of a conformant DID Document (see the [test vectors](https://github.com/decentralized-identity/waci-didcomm/tree/main/test/vectors) in the repository for more context):
 ```json
 {
   "service": [{
