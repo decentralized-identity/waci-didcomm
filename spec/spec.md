@@ -1165,9 +1165,9 @@ object for the VP and used to generate the signature there.
   "type": "https://didcomm.org/present-proof/3.0/presentation",
   "id": "f1ca8245-ab2d-4d9c-8d7d-94bf310314ef",
   "thid": "95e63a5f-73e1-46ac-b269-48bb22591bfa",
-  "from": "did:example:verifier",
+  "from": "did:example:prover",
   "to": [
-    "did:example:prover"
+    "did:example:verifier"
   ],
   "body": {},
   "attachments": [
