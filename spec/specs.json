@@ -10,7 +10,7 @@
       "source": {
         "host": "github",
         "account": "decentralized-identity",
-        "repo": "waci-presentation-exchange"
+        "repo": "waci-didcomm"
       }
     },
     {
@@ -22,7 +22,7 @@
       "source": {
         "host": "github",
         "account": "decentralized-identity",
-        "repo": "waci-presentation-exchange"
+        "repo": "waci-didcomm"
       }
     }   
   ]
