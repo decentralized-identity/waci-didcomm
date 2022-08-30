@@ -1,10 +1,10 @@
-# WACI-DIDComm Interop Profile 
+# WACI-DIDComm Interop Profile v1.0
 
 A [DIDComm v2.0](https://github.com/decentralized-identity/didcomm-messaging) Profile for supporting the Wallet and Credential Interaction (WACI) Protocols for both Issuance and [Presentation Exchange](), colloqually known as:
 
 > WACI PEx [__wak__-ee pex]
 
-**Specification Status:** [Draft V0.1.0](https://identity.foundation/waci-didcomm/v0.1) (also snapshotted and archived on 12/06/21 on [web.archive.org](https://web.archive.org/web/20211206215823/https://identity.foundation/waci-didcomm/))
+**Specification Status:** [Draft V1.0](https://identity.foundation/waci-didcomm/v1.0)
 **Latest Draft:** [https://identity.foundation/waci-didcomm/](https://identity.foundation/waci-didcomm/)
 
 **Editors:**
