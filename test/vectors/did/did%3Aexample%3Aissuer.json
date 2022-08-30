@@ -1,0 +1,31 @@
+{
+    "@context":[
+       "https://www.w3.org/ns/did/v1",
+       "https://w3id.org/security/suites/jws-2020/v1"
+    ],
+    "id":"did:example:issuer",
+    "verificationMethod":[
+       {
+          "controller":"did:example:issuer",
+          "id":"did:example:issuer#key1",
+          "publicKeyJwk":{
+             "kty":"EC",
+             "crv":"P-256",
+             "x":"IAY6G0xR4kcVkc_KrIyPb1a50qMCMjHPjVfUunrVGvs",
+             "y":"qzOw6AnovPqnYn2l6MdEBYfVMPNEQTpMxrlcKRDenCk"
+          },
+          "type":"JsonWebKey2020"
+       }
+    ],
+    "service":[
+       {
+          "id":"did:example:issuer#didcomm",
+          "serviceEndpoint":"https://example.com/issuer",
+          "type":"DIDCommMessaging"
+       }
+    ],
+    "assertionMethod": ["did:example:issuer#key1"],
+    "keyAgreement":[
+       "did:example:issuer#key1"
+    ]
+ }
