@@ -5,6 +5,7 @@ A [DIDComm v2.0](https://github.com/decentralized-identity/didcomm-messaging) Pr
 > WACI PEx [__wak__-ee pex]
 
 **Specification Status:** [Draft V1.0](https://identity.foundation/waci-didcomm/v1.0)
+
 **Latest Draft:** [https://identity.foundation/waci-didcomm/](https://identity.foundation/waci-didcomm/)
 
 **Editors:**
