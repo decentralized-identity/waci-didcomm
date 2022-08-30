@@ -5,7 +5,6 @@ A [DIDComm v2.0](https://github.com/decentralized-identity/didcomm-messaging) Pr
 > WACI PEx [__wak__-ee pex]
 
 **Specification Status:** [Draft V0.1.0](https://identity.foundation/waci-didcomm/v0.1) (also snapshotted and archived on 12/06/21 on [web.archive.org](https://web.archive.org/web/20211206215823/https://identity.foundation/waci-didcomm/))
-
 **Latest Draft:** [https://identity.foundation/waci-didcomm/](https://identity.foundation/waci-didcomm/)
 
 **Editors:**
@@ -54,13 +53,11 @@ the [JsonWebSignature2020](https://w3c-ccg.github.io/lds-jws2020/) signature sui
 
 ## Status of This Document
 
-[WACI-DIDComm Profile DRAFT](https://identity.foundation/waci-didcomm/)
-is a _DRAFT_ interoperability profile under development by the
+[WACI-DIDComm Interop Profile v1.0.0](https://identity.foundation/waci-didcomm/)
+is a _WORKING GROUP APPROVED_ interoperability profile under development by the
 [Claims and Credentials Working Group](https://identity.foundation/working-groups/claims-credentials.html) at [DIF](https://identity.foundation).
 
-We feel that the specification is ready for feedback from other decentralized
-identity-related and -adjacent communities. Further validation and improvement of
-the specification will be done via implementation and testing.
+We feel that the specification is ready for publication as v1.0.0.
 
 We encourage reviewers to submit issues on
 [GitHub](https://github.com/decentralized-identity/waci-didcomm/issues).
