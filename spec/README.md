@@ -7,8 +7,8 @@ QR Codes and Links for credential centric wallet interactions.
 ## Getting Started
 
 ```
-git clone git@github.com:hellobloom/wallet-credential-interactions.git
-cd wallet-credential-interactions
+git clone git@github.com:decentralized-identity/waci-didcomm.git
+cd waci-didcomm/spec
 npm i
 npm run build
 npx serve ./build

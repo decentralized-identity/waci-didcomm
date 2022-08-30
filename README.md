@@ -1,5 +1,7 @@
 # WACI DIDComm
 
+[![build spec](https://github.com/decentralized-identity/waci-didcomm/actions/workflows/build-spec.yml/badge.svg)](https://github.com/decentralized-identity/waci-didcomm/actions/workflows/build-spec.yml)
+
 > WACI [__wak__-ee] - Wallet And Credential Interactions
 
 QR Codes and Links for wallet and credential interactions.
