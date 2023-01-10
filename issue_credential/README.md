@@ -219,6 +219,12 @@ Message Format:
     "goal_code": "<goal-code>",
     "comment": "some comment"
   },
+  "formats": [
+    {
+      "attach_id": "<attachment identifier>",
+      "format": "dif/credential-manifest@v1.0"
+    }
+  ],
   "attachments": [
     {
       "id": "<attachment identifier>",
@@ -236,7 +242,7 @@ Description of Fields:
 
 - `goal_code` -- optional field that indicates the goal of the message sender.
 - `comment` -- an optional field that provides human readable information about this Credential Request, so it can be evaluated by human judgment. Follows [DIDComm conventions for l10n](https://github.com/hyperledger/aries-rfcs/tree/main/features/0043-l10n/README.md).
-- `formats` -- contains an entry for each `requests~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
+- `formats` -- contains an entry for each `attachments` array entry, providing the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
 - `attachments` -- an array of [attachments](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0017-attachments/README.md) defining the requested formats for the credential.
 
 This message may have a [`~payment-receipt` decorator](https://github.com/hyperledger/aries-rfcs/tree/main/features/0075-payment-decorators/README.md#payment_receipt) to prove to the Issuer that the potential Holder has satisfied a payment requirement. See the [payment section below](#payments-during-credential-exchange).
