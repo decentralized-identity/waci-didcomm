@@ -222,7 +222,7 @@ Message Format:
   "formats": [
     {
       "attach_id": "<attachment identifier>",
-      "format": "dif/credential-manifest@v1.0"
+      "format": "<format value>"
     }
   ],
   "attachments": [
