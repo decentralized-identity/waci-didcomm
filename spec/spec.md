@@ -1,6 +1,6 @@
 # WACI-DIDComm Interop Profile 
 
-A [DIDComm v2.0](https://github.com/decentralized-identity/didcomm-messaging) Profile for supporting the Wallet and Credential Interaction (WACI) Protocols for both Issuance and [Presentation Exchange](), colloqually known as:
+A [DIDComm v2.0](https://identity.foundation/didcomm-messaging/spec/v2.0/) Profile for supporting the Wallet and Credential Interaction (WACI) Protocols for both Issuance and [Presentation Exchange](), colloqually known as:
 
 > WACI PEx [__wak__-ee pex]
 
@@ -43,7 +43,7 @@ requiring an implementer to understand all of them. It inherits its overall
 structure from 
 [the current pre-draft of WACI](https://github.com/decentralized-identity/wallet-and-credential-interactions),
 but makes use of elements from the
-[DIDComm v2.0](https://github.com/decentralized-identity/didcomm-messaging)
+[DIDComm v2.0](https://identity.foundation/didcomm-messaging/spec/v2.0/)
 messaging protocol, along with
 [Aries Present Proof](https://github.com/hyperledger/aries-rfcs/blob/master/features/0454-present-proof-v2/README.md)
 message formats and
@@ -108,7 +108,7 @@ our purposes.
 
 ### Protocol Considerations
 Before fixing the scope of this work item and settling on using elements of
-[DIDComm v2.0](https://identity.foundation/didcomm-messaging/spec/) to securely
+[DIDComm v2.0](https://identity.foundation/didcomm-messaging/spec/v2.0/) to securely
 communicate the data objects, there was a long and lively discussion about other
 options at IIW. 
 
@@ -122,7 +122,7 @@ but in its current state lacked any API for a `Verifiable Credential` holder. A
 number of participants expressed a desire for the WACI specification to strive to be
 compatible with this API, and that remains a goal of this group.
 
-- [DIDComm v2.0](https://identity.foundation/didcomm-messaging/spec/) describes
+- [DIDComm v2.0](https://identity.foundation/didcomm-messaging/spec/v2.0/) describes
 a method for securely communicating authenticated messages between entities that
 control [Decentralized Identifiers](https://www.w3.org/TR/did-core/) along any
 transport layer. It allows for two parties to mutually authenticate and securely
@@ -175,7 +175,7 @@ Here is an abbreviated example (see the [test vectors](https://github.com/decent
 ## DIDComm Context
 
 The exchange specified in the [DIDComm v2
-specification](https://identity.foundation/didcomm-messaging/spec/) is presumed
+specification](https://identity.foundation/didcomm-messaging/spec/v2.0/) is presumed
 to take place between two subjects that control DIDs with certain properties,
 and can take place over many different transports. Having a connection means
 that each party in the relationship has a DID for the other parties, and parties
@@ -186,7 +186,7 @@ All parties MUST have a `DID document` that complies with this specification.
 ### service property
 
 A `DID document` that complies with this specification MUST have a `service`
-property, consisting of a structured object as per the DIDComm v2 specification (see [the DID Document section](https://identity.foundation/didcomm-messaging/spec/#did-document-service-endpoint)).
+property, consisting of a structured object as per the DIDComm v2 specification (see [the DID Document section](https://identity.foundation/didcomm-messaging/spec/v2.0/#did-document-service-endpoint)).
 
 Here is an abbreviated example showing the `service` section of a conformant DID Document (see the [test vectors](https://github.com/decentralized-identity/waci-didcomm/tree/main/test/vectors) in the repository for more context):
 ```json
@@ -310,7 +310,7 @@ Details of sending an encrypted message to a `serviceEndpoint` via HTTP:
 
 - Messages are transported via HTTP POST.
 - The MIME Type for the POST request is set to the corresponding media type
-defined in [Media Types](https://identity.foundation/didcomm-messaging/spec/#iana-media-types),
+defined in [Media Types](https://identity.foundation/didcomm-messaging/spec/v2.0#iana-media-types),
 e.g., `application/didcomm-encrypted+json`.
 - A successful message receipt MUST return a code in the 2xx HTTP Status Code
 range. It is RECOMMENDED that a HTTP POST return a `202 Accepted` status code.
@@ -324,7 +324,7 @@ Perfect Forward Secrecy (PFS) on the transmission leg.
 
 ### Web Redirect
 
-The DIDComm v2 supports [web_redirect](https://identity.foundation/didcomm-messaging/spec/#redirecting-back-to-sender) 
+The DIDComm v2 supports [web_redirect](https://identity.foundation/didcomm-messaging/spec/v2.0#redirecting-back-to-sender) 
 feature to redirect the receiver application back to the sender application. In the case of WACI, 
 the Issuer/Verifier may ask the Wallet to redirect back using this property. 
 
@@ -371,7 +371,7 @@ Example problem-report message containing web_redirect information.
 
 ### Issuance
 
-The issuance flow uses [DIF DIDComm v2](https://identity.foundation/didcomm-messaging/spec/) along with [Issue Credential v3](https://github.com/decentralized-identity/waci-didcomm/blob/main/issue_credential/README.md) and [DIF Credential Manifest](https://identity.foundation/credential-manifest/).
+The issuance flow uses [DIF DIDComm v2](https://identity.foundation/didcomm-messaging/spec/v2.0#redirecting-back-to-sender) along with [Issue Credential v3](https://github.com/decentralized-identity/waci-didcomm/blob/main/issue_credential/README.md) and [DIF Credential Manifest](https://identity.foundation/credential-manifest/).
 
 ```mermaid
 sequenceDiagram
@@ -1305,4 +1305,4 @@ DIDComm V2, there is currently no support in DIDComm for authenticated
 encryption of messages, specifically the ECDH-1PU methodology. We anticipate
 that this capability will be introduced in DIDComm V2 as it reaches maturity and
 we advise those interested in the topic to follow the progress
-[there](https://github.com/decentralized-identity/didcomm-messaging).
+[there](https://identity.foundation/didcomm-messaging/spec/).
