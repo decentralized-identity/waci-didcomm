@@ -19,7 +19,7 @@
 Version 2.0 of the protocol is introduced because of a breaking changes in the propose-credential message, replacing the (indy-specific) filtration criteria with a generalized filter attachment to align with the rest of the messages in the protocol. The previous version is [1.1/propose-credential](https://github.com/hyperledger/aries-rfcs/tree/main/features/0036-issue-credential/README.md).
 Version 2.0 also uses &lt;angle brackets&gt; explicitly to mark all values that may vary between instances, such as identifiers and comments.
 
-The "formats" field is added to all the messages to enable the linking the specific attachment IDs with the the format (credential format and version) of the attachment.
+The "formats" field is added to all the messages to enable the linking the specific attachment IDs with the format (credential format and version) of the attachment.
 
 The details that are part of each message type about the different attachment formats serves as a registry of the known formats and versions.
 
@@ -219,6 +219,12 @@ Message Format:
     "goal_code": "<goal-code>",
     "comment": "some comment"
   },
+  "formats": [
+    {
+      "attach_id": "<attachment identifier>",
+      "format": "<format value>"
+    }
+  ],
   "attachments": [
     {
       "id": "<attachment identifier>",
@@ -236,7 +242,7 @@ Description of Fields:
 
 - `goal_code` -- optional field that indicates the goal of the message sender.
 - `comment` -- an optional field that provides human readable information about this Credential Request, so it can be evaluated by human judgment. Follows [DIDComm conventions for l10n](https://github.com/hyperledger/aries-rfcs/tree/main/features/0043-l10n/README.md).
-- `formats` -- contains an entry for each `requests~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
+- `formats` -- contains an entry for each `attachments` array entry, providing the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
 - `attachments` -- an array of [attachments](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0017-attachments/README.md) defining the requested formats for the credential.
 
 This message may have a [`~payment-receipt` decorator](https://github.com/hyperledger/aries-rfcs/tree/main/features/0075-payment-decorators/README.md#payment_receipt) to prove to the Issuer that the potential Holder has satisfied a payment requirement. See the [payment section below](#payments-during-credential-exchange).
@@ -283,7 +289,7 @@ Description of fields:
 - `comment` -- an optional field that provides human readable information about the issued credential, so it can be evaluated by human judgment. Follows [DIDComm conventions for l10n](https://github.com/hyperledger/aries-rfcs/tree/main/features/0043-l10n/README.md).
 - `attachments` -- an array of attachments containing the issued credentials.
 
-If the issuer wants an acknowledgement that he issued credential was accepted, this message must be decorated with the `~please-ack` decorator using the `OUTCOME` acknowledgement request. Outcome in the context of this protocol means the acceptance of the credential in whole, i.e. the credential is verified and the contents of the credential are acknowledged. Note that this is different from the default behavior as described in [0317: Please ACK Decorator](https://github.com/hyperledger/aries-rfcs/tree/main/features/0317-please-ack/README.md). It is then best practice for the new Holder to respond with an explicit `ack` message as described in the please ack decorator RFC.
+If the issuer wants an acknowledgement that the issued credential was accepted, this message must be decorated with the `~please-ack` decorator using the `OUTCOME` acknowledgement request. Outcome in the context of this protocol means the acceptance of the credential in whole, i.e. the credential is verified and the contents of the credential are acknowledged. Note that this is different from the default behavior as described in [0317: Please ACK Decorator](https://github.com/hyperledger/aries-rfcs/tree/main/features/0317-please-ack/README.md). It is then best practice for the new Holder to respond with an explicit `ack` message as described in the please ack decorator RFC.
 
 ##### Credentials Attachment Registry
 
