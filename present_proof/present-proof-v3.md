@@ -13,7 +13,7 @@
 
 - Align Attachments with DIDComm V2 format
 
-### 2.0 - Alignment with [RFC 0453 Issue Credential](../0453-issue-credential-v2/README.md)
+### 2.0 - Alignment with [RFC 0453 Issue Credential](https://github.com/hyperledger/aries-rfcs/blob/main/features/0453-issue-credential-v2/README.md)
 
 - The "formats" field is added to all the messages to link the specific attachment IDs with the verifiable presentation format and version of the attachment.
 - The details that are part of each message type about the different attachment formats serves as a registry of the known formats and versions.
@@ -35,7 +35,7 @@ We need a standard protocol for a verifier to request a presentation from a prov
 
 ### Key Concepts
 
-This protocol is about the messages to support the presentation of verifiable claims, not about the specifics of particular verifiable presentation formats. [DIDComm attachments](../../concepts/0017-attachments/README.md) are deliberately used in messages to make the protocol agnostic to specific verifiable presentation format payloads. Links are provided in the message data element descriptions to details of specific verifiable presentation implementation data structures.
+This protocol is about the messages to support the presentation of verifiable claims, not about the specifics of particular verifiable presentation formats. [DIDComm attachments](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0017-attachments/README.md) are deliberately used in messages to make the protocol agnostic to specific verifiable presentation format payloads. Links are provided in the message data element descriptions to details of specific verifiable presentation implementation data structures.
 
 Diagrams in this protocol were made in draw.io. To make changes:
 
@@ -98,7 +98,7 @@ The present proof protocol consists of these messages:
 * `request-presentation` - Verifier to Prover - request a presentation
 * `presentation` - Prover to Verifier - provide a presentation in response to a request
 
-In addition, the [`ack`](../0015-acks/README.md) and [`problem-report`](../0035-report-problem/README.md) messages are adopted into the protocol for confirmation and error handling.
+In addition, the [`ack`](https://github.com/hyperledger/aries-rfcs/tree/main/features/0015-acks/README.md) and [`problem-report`](https://github.com/hyperledger/aries-rfcs/tree/main/features/0035-report-problem) messages are adopted into the protocol for confirmation and error handling.
 
 The messages that include `attachments` may use any form of the embedded attachment. In the examples below, the forms of the attachment are arbitrary.
 
@@ -145,8 +145,8 @@ Negotiation prior to the delivery of the presentation can be done using the `pro
 
 Presentation Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
-Hyperledger Indy Proof Req| hlindy/proof-req@v2.0 | [proof request format](../0592-indy-attachments/README.md#proof-request-format) | Used to propose as well as request proofs.
-DIF Presentation Exchange | `dif/presentation-exchange/definitions@v1.0` | [`propose-presentation` attachment format](../0510-dif-pres-exch-attach/README.md#propose-presentation-attachment-format) | 
+Hyperledger Indy Proof Req| `hlindy/proof-req@v2.0` | [`proof request` format](https://github.com/hyperledger/aries-rfcs/blob/main/features/0592-indy-attachments/README.md#proof-request-format) | Used to propose as well as request proofs.
+DIF Presentation Exchange | `dif/presentation-exchange/definitions@v1.0` | [`propose-presentation` attachment format](https://github.com/hyperledger/aries-rfcs/blob/main/features/0510-dif-pres-exch-attach/README.md#propose-presentation-attachment-format) | 
 
 ### Request Presentation
 
@@ -185,8 +185,8 @@ Description of fields:
 
 Presentation Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
-Hyperledger Indy Proof Req| hlindy/proof-req@v2.0 | [proof request format](../0592-indy-attachments/README.md#proof-request-format) | Used to propose as well as request proofs.
-DIF Presentation Exchange | `dif/presentation-exchange/definitions@v1.0` | [`propose-presentation` attachment format](../0510-dif-pres-exch-attach/README.md#request-presentation-attachment-format) | 
+Hyperledger Indy Proof Req| `hlindy/proof-req@v2.0` | [`proof request` format](https://github.com/hyperledger/aries-rfcs/blob/main/features/0592-indy-attachments/README.md#proof-request-format) | Used to propose as well as request proofs.
+DIF Presentation Exchange | `dif/presentation-exchange/definitions@v1.0` | [`propose-presentation` attachment format](https://github.com/hyperledger/aries-rfcs/blob/main/features/0510-dif-pres-exch-attach/README.md#request-presentation-attachment-format) | 
 
 ### Presentation
 
@@ -220,22 +220,22 @@ Description of fields:
 * `goal_code` -- optional field that indicates the goal of the message sender. 
 * `attachments` -- an array of attachments containing the presentation in the requested format(s). Accepted values for the `format` attribute of each attachment are provided in the per format [Attachment](#presentation-request-attachment-registry) registry immediately below.
 
-If the prover wants an acknowledgement that the presentation was accepted, this message may be decorated with the `~please-ack` decorator using the `OUTCOME` acknowledgement request. This is not necessary if the verifier has indicated it will send an `ack-presentation` using the `will_confirm` property. Outcome in the context of this protocol is the definition of "successful" as described in [Ack Presentation](#ack-presentation). Note that this is different from the default behavior as described in [0317: Please ACK Decorator](../0317-please-ack/README.md). It is then best practice for the new Verifier to respond with an explicit `ack` message as described in the please ack decorator RFC.
+If the prover wants an acknowledgement that the presentation was accepted, this message may be decorated with the `~please-ack` decorator using the `OUTCOME` acknowledgement request. This is not necessary if the verifier has indicated it will send an `ack-presentation` using the `will_confirm` property. Outcome in the context of this protocol is the definition of "successful" as described in [Ack Presentation](#ack-presentation). Note that this is different from the default behavior as described in [0317: Please ACK Decorator](https://github.com/hyperledger/aries-rfcs/tree/main/features/0317-please-ack/README.md). It is then best practice for the new Verifier to respond with an explicit `ack` message as described in the please ack decorator RFC.
 
 #### Presentations Attachment Registry
 
 Presentation Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
-Hyperledger Indy Proof | hlindy/proof@v2.0 | [proof format](../0592-indy-attachments/README.md#proof-format) |
-DIF Presentation Exchange | `dif/presentation-exchange/submission@v1.0` | [`propose-presentation` attachment format](../0510-dif-pres-exch-attach/README.md#presentation-attachment-format) | 
+Hyperledger Indy Proof | `hlindy/proof@v2.0` | [`proof` format](https://github.com/hyperledger/aries-rfcs/blob/main/features/0592-indy-attachments/README.md#proof-format) |
+DIF Presentation Exchange | `dif/presentation-exchange/submission@v1.0` | [`propose-presentation` attachment format](https://github.com/hyperledger/aries-rfcs/blob/main/features/0510-dif-pres-exch-attach/README.md#presentation-attachment-format) | 
 
 ### Ack Presentation
 
-A message from the verifier to the prover that the `Present Proof` protocol was completed successfully and is now in the `done` state. The message is an adopted `ack` from the [RFC 0015 acks protocol](../0015-acks/README.md). The definition of "successful" in this protocol means the acceptance of the presentation in whole, i.e. the proof is verified and the contents of the proof are acknowledged.
+A message from the verifier to the prover that the `Present Proof` protocol was completed successfully and is now in the `done` state. The message is an adopted `ack` from the [RFC 0015 acks protocol](https://github.com/hyperledger/aries-rfcs/tree/main/features/0015-acks/README.md). The definition of "successful" in this protocol means the acceptance of the presentation in whole, i.e. the proof is verified and the contents of the proof are acknowledged.
 
 ### Problem Report
 
-A message from the verifier to the prover that follows the `presentation` message to indicate that the `Present Proof` protocol was completed unsuccessfully and is now in the `abandoned` state. The message is an adopted `problem-report` from the [RFC 0015 report-problem protocol](../0035-report-problem/README.md). The definition of "unsuccessful" from a business sense is up to the verifier. The elements of the `problem-report` message can provide information to the prover about why the protocol instance was unsuccessful.
+A message from the verifier to the prover that follows the `presentation` message to indicate that the `Present Proof` protocol was completed unsuccessfully and is now in the `abandoned` state. The message is an adopted `problem-report` from the [RFC 0015 report-problem protocol](https://github.com/hyperledger/aries-rfcs/tree/main/features/0035-report-problem/README.md). The definition of "unsuccessful" from a business sense is up to the verifier. The elements of the `problem-report` message can provide information to the prover about why the protocol instance was unsuccessful.
 
 Either party may send a `problem-report` message earlier in the flow to terminate the protocol before its normal conclusion.
 
@@ -253,7 +253,7 @@ The verifiable presentation standardization work being conducted in parallel to 
 
 ## Prior art
 
-The existing [RFC 0037 Present Proof](../0037-present-proof/README.md) protocol and implementations.
+The existing [RFC 0037 Present Proof](https://github.com/hyperledger/aries-rfcs/tree/main/features/0037-present-proof) protocol and implementations.
 
 ## Unresolved questions
 
