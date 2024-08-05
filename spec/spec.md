@@ -20,6 +20,7 @@ A [DIDComm v2.0](https://identity.foundation/didcomm-messaging/spec/v2.0/) Profi
 ~ [Brian Richter](https://www.linkedin.com/in/brianrichter3/) (Aviary Tech)
 ~ [Rolson Quadras](https://www.linkedin.com/in/rolsonquadras/) ([SecureKey](https://securekey.com/))
 ~ [Juan Caballero](https://www.linkedin.com/in/juan-caballero/) (Centre.io)
+~ [Martin Westerkamp](https://www.linkedin.com/in/martin-westerkamp-851398157/) (Spherity)
 
 
 **Participate:**
@@ -774,6 +775,8 @@ The User sends a [Credential Application message](https://identity.foundation/cr
                "credential_application":{
                   "id":"9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
                   "manifest_id":"dcc75a16-19f5-4273-84ce-4da69ee2b7fe",
+                  "spec_version":"https://identity.foundation/credential-manifest/spec/v1.0.0/",
+                  "applicant":"did:example:ebfeb1f712ebc6f1c276e12ec21",
                   "format":{
                      "ldp_vc":{
                         "proof_type":[
@@ -869,22 +872,27 @@ The Issuer sends a [Credential Fulfilment message](https://identity.foundation/c
             "json":{
                "@context":[
                   "https://www.w3.org/2018/credentials/v1",
-                  "https://identity.foundation/credential-manifest/fulfillment/v1"
+                  "https://identity.foundation/credential-manifest/response/v1"
                ],
                "type":[
                   "VerifiablePresentation",
-                  "CredentialFulfillment"
+                  "CredentialResponse"
                ],
-               "credential_fulfillment":{
-                  "id":"a30e3b91-fb77-4d22-95fa-871689c322e2",
+               "credential_response": {
+                  "id":"fb61b375-0b0d-4715-ab2d-fe6b15874e64",
+                  "spec_version":"https://identity.foundation/credential-manifest/spec/v1.0.0/",
+                  "applicant":"did:example:ebfeb1f712ebc6f1c276e12ec21",
                   "manifest_id":"dcc75a16-19f5-4273-84ce-4da69ee2b7fe",
-                  "descriptor_map":[
-                     {
-                        "id":"driver_license_output",
-                        "format":"ldp_vc",
-                        "path":"$.verifiableCredential[0]"
-                     }
-                  ]
+                  "application_id":"9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
+                  "fulfillment":{
+                     "descriptor_map":[
+                        {
+                           "id":"driver_license_output",
+                           "format":"ldp_vc",
+                           "path":"$.verifiableCredential[0]"
+                        }
+                     ]
+                  }
                },
                "verifiableCredential":[
                   {
@@ -911,14 +919,7 @@ The Issuer sends a [Credential Fulfilment message](https://identity.foundation/c
                         "verificationMethod":"did:orb:EiA3Xmv8A8vUH5lRRZeKakd-cjAxGC2A4aoPDjLysjghow#tMIstfHSzXfBUF7O0m2FiBEfTb93_j_4ron47IXPgEo"
                      }
                   }
-               ],
-               "proof":{
-                  "created":"2021-06-07T20:02:44.730614315Z",
-                  "jws":"eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..NVum9BeYkhzwslZXm2cDOveQB9njlrCRSrdMZgwV3zZfLRXmZQ1AXdKLLmo4ClTYXFX_TWNyB8aFt9cN6sSvCg",
-                  "proofPurpose":"authentication",
-                  "type":"Ed25519Signature2018",
-                  "verificationMethod":"did:orb:EiA3Xmv8A8vUH5lRRZeKakd-cjAxGC2A4aoPDjLysjghow#tMIstfHSzXfBUF7O0m2FiBEfTb93_j_4ron47IXPgEo"
-               }
+               ]
             }
          }
       }
